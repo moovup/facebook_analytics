@@ -30,6 +30,15 @@ class FacebookAnalyticsPlugin(private val context: Activity, private val methodC
                 logger.logEvent(call.argument("name"), parameterBundle)
                 result.success(null)
             }
+            call.method == "setUserID" -> {
+                AppEventsLogger.setUserID(call.argument("userId"))
+                result.success(null)
+            }
+            call.method == "updateUserProperties" -> {
+                val parameterBundle = createBundleFromMap(call.argument("parameters") as Map<String, Any>?)
+                AppEventsLogger.updateUserProperties(parameterBundle, null)
+                result.success(null)
+            }
             else -> result.notImplemented()
         }
     }

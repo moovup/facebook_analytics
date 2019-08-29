@@ -26,5 +26,27 @@ public class SwiftFacebookAnalyticsPlugin: NSObject, FlutterPlugin {
                 FBSDKAppEvents.logEvent(eventName)
             }
         }
+        else if(call.method == "setUserID"){
+            guard let args = call.arguments else {
+                return
+            }
+            
+            if let myArgs = args as? [String: Any],
+                let userId = myArgs["userId"] as? String
+            {
+                 FBSDKAppEvents.setUserID(userId)
+            }
+        }
+        else if(call.method == "updateUserProperties"){
+            guard let args = call.arguments else {
+                return
+            }
+            
+            if let myArgs = args as? [String: Any],
+                let parameters = myArgs["parameters"] as? [String: Any]
+            {
+                FBSDKAppEvents.updateUserProperties(parameters, handler: nil)
+            }
+        }
     }
 }

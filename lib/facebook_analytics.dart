@@ -17,6 +17,7 @@ class FacebookAnalytics {
 
   Future<void> logEvent(
       {@required String name, Map<String, dynamic> parameters}) async {
+
     await _channel
         .invokeListMethod('logEvent', {"name": name, "parameters": parameters});
   }
@@ -28,9 +29,32 @@ class FacebookAnalytics {
       throw ArgumentError.notNull('screenName');
     }
 
+
     await _channel.invokeMethod<void>('setCurrentScreen', <String, String>{
       'screenName': screenName,
       'screenClassOverride': screenClassOverride,
     });
   }
+
+  Future<void> setUserID({@required String userID}) async {
+    if (userID == null) {
+      throw ArgumentError.notNull('userID');
+    }
+
+    await _channel.invokeMethod<void>('setUserID', {
+      'userId': userID
+    });
+  }
+
+  Future<void> updateUserProperties({@required Map<String, dynamic> parameters}) async {
+    if (parameters == null) {
+      throw ArgumentError.notNull('updateUserProperties');
+    }
+
+    await _channel.invokeMethod<void>('updateUserProperties', {
+      'parameters': parameters
+    });
+  }
+
+
 }
