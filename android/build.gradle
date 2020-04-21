@@ -39,7 +39,7 @@ android {
         disable 'InvalidPackage'
     }
     dependencies {
-        implementation 'com.facebook.android:facebook-android-sdk:[5,6)'
+        implementation 'com.facebook.android:facebook-android-sdk:5.8.0'
     }
 }
 
